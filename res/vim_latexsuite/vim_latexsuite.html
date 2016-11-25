@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/main.css">
+	<title>Nievas Technology</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+  }
+  </style>
+	</head>
+<body>		
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+
+	    <div class="container">
+		    <div class="navbar-header">
+			    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			    <span class="sr-only">Toggle navigation</span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar">
+			    </span>
+			    </button>
+		    <img src="../../img/LOGO_MARTIN.jpg" class="imagen_logo_chica navbar-brand ">
+	     	<a class="navbar-brand" href="#">Nievas Technology</a>
+		    </div>
+	            <div id="navbar" class="collapse navbar-collapse">
+		    <ul class="nav navbar-nav">
+			    <li class="active"><a href="../menu.html">Home</a></li>
+			    <li><a href="#about">About</a></li>
+			    <li><a href="#contact">Contact</a></li>
+		    </ul>
+
+	</div><!--/.nav-collapse -->
+	</nav>
+<div class="container">
+
+      <div class="about-texto">
+        <h1>Instalación de Vim y configuración de Vim-LatexSuite</h1>
+        <p class="lead"></p>
+      </div>
+
+</div><!-- /.container -->
+ <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <p>Si tenemos instalado <a href="http://www.vim.org/">Vim</a>,nos saltamos este paso, sino, podemos instalarlo con el siguiente comando:</p>
+<p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"> </span>sudo apt-get install vim</pre></div>
+</div>
+
+<h2 class="section-heading">Administrador de Plugin</h2>
+<p>Lo siguiente es instalar un package manager, en este caso usamos <a href="https://github.com/tpope/vim-pathogen#">Pathogen</a>, el cual, suponiendo que es una instalación desde cero, se realiza de la siquiente manera: </p>
+
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>mkdir -p ~/.vim/autoload ~/.vim/bundle
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim</pre></div>
+</div>
+<p>Si no tenemos instalado curl, lo instalamos de la siquiente manera</p> 
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim</pre></div>
+</div>
+<p> </p>
+<p>Agregamos estas lineas a nuestro <code>~/.vimrc</code>:</p>
+<p></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>" contenido minimo de un .vimrc
+execute pathogen#infect()
+syntax on
+filetype plugin indent only
+    </pre></div>
+</div>
+
+<h2 class="section-heading">Plugins comunes</h2>
+<h3>NERD Tree</h3>
+<p>Un plugin muy útil, que nos permite navegar entre archivos desde el mismo vim es <a href="https://github.com/scrooloose/nerdtree">NERD Tree</a>, que si tenemos Phatogen, se realiza de la siguiente manera: </p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>cd ~/.vim/bundle</pre></div>
+</div>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>git clone https://github.com/scrooloose/nerdtree.git</pre></div>
+</div>
+<h3>jedi-vim</h3>
+<p>Otro plugin interesante es el de autocompletar sintaxis, <a href="https://github.com/davidhalter/jedi-vim">jedi-vim</a>. Primero instalamos el paquete de python de <a href="https://github.com/davidhalter/jedi">jedi</a>: </p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span> pip install --user jedi</pre></div>
+</div>
+<p>Por último instalamos usando pathogen:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>cd ~/.vim/bundle/
+git clone https://github.com/davidhalter/jedi-vim.git
+</pre></div>
+</div>
+<h3>vim-template</h3>
+Con <a href="https://github.com/aperezdc/vim-template#">vim-template</a>, tenemos la psoibilidad de tener plantillas de extensiones de programas. Para instalarlo usando Pathogen:
+
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>cd ~/.vim/bundle
+git clone git://github.com/aperezdc/vim-template.git
+</pre></div>
+</div>
+
+<h2 class="section-heading">vim-Latex-Suite</h2>
+<h4>Como instalar los paquetes para compilar con <a href="http://vim-latex.sourceforge.net/">vim-latexsuite</a></h4>
+<p>Necesitamos descargar los archivos de <a href="https://sourceforge.net/projects/vim-latex/files/">SourceForge</a></p>
+
+<p>Extraemos los archivos en sus correspondientes carpetas, dentro de <code>~/.vim</code></p>
+  
+<p>Agregar en el archivo <code>.vimrc</code>las siguientes lineas:</p>
+
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>filetype plugin on
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+""Pueden agregarse mas, pero eso es lo básico
+</pre></div>
+</div>
+
+Colocar en el archivo <code>~/.vim/ftplugin/tex.vim</code>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv"></span>"Identando el código queda mas presentable
+set sw=2
+" TIP: if you write your \label's as \label{fig:something}, then if you
+" type in \ref{fig: and press <C-n> you will automatically cycle through
+" all the figure labels. Very useful!
+set iskeyword+=:
+</pre></div>
+</div>
+<h4>Instalar la ayuda</h4>
+<p>tipear en vim:</p>
+<code>helptags ~/.vim/doc</code>
+<p> </p>
+<p>Para agregar librerias de matemática</p>
+<code>\usepackage{algorithm}</code>
+las instalamos con el comando:
+<code>sudo apt-get install texlive-science</code>
+<h3>Como utilizar:</h3>
+Una guia completa está <a href="#//vim-lhttpsatex.sourceforge.net/documentation/latex-suite/index.html">aquí</a>
+<h3>Resumiendo</h3>
+<p>para compilar, en vim en el modo NORMAL, correr el comando <code>\ll</code></p>
+
+<p>para ver el archivo pdf correr el comando <code>\lv</code></p>
+                    <p> </p>
+                    <p><a href="#">return top</a></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+<body>
